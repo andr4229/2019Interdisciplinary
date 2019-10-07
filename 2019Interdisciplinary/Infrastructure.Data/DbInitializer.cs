@@ -17,7 +17,7 @@ namespace Infrastructure.Data
             // already exists, no action is taken (and no effort is made to ensure it
             // is compatible with the model for this context).
             context.Database.EnsureCreated();
-
+            /*
             // Look for any TodoItems
             if (context.Neonlights.Any())
             {
@@ -33,7 +33,7 @@ namespace Infrastructure.Data
             };
 
             context.Neonlights.AddRange(items);
-            context.SaveChanges();
+            context.SaveChanges();*/
         }
     }
 }
