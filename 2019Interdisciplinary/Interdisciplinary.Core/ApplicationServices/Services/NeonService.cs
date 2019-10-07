@@ -58,11 +58,11 @@ namespace Interdisciplinary.Core.ApplicationServices.Services
             }
         }
 
-        public Neonlight Update(int id)
+        public Neonlight Update(int id, Neonlight nlToUpdate)
         {
             try
             {
-                return _nlRepo.Update(id);
+                return _nlRepo.Update(id, nlToUpdate);
             }
             catch (Exception ex)
             {

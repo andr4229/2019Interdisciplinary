@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net.Mime;
 using System.Text;
 
 namespace Interdisciplinary.Core.Entity
@@ -16,6 +17,8 @@ namespace Interdisciplinary.Core.Entity
         public double Price { get; set; }
         public string EnergyLabel { get; set; }
         public bool Battery { get; set; }
+        public List<OrderLine> Orders { get; set; }
+        
 
         public enum Colour
         {

@@ -32,7 +32,7 @@ namespace Infrastructure.Data.Repositories
             return _ctx.Neonlights;
         }
 
-        public Neonlight Update(int id)
+        public Neonlight Update(int id, Neonlight updatedNl)
         {
             _ctx.Neonlights.Attach(ReadById(id)).State = EntityState.Modified;
             _ctx.SaveChanges();
