@@ -12,6 +12,6 @@ namespace Infrastructure.Data
             : base(options)
         {
         }
-        public DbSet<Neonlight> Neonlights;
+        public DbSet<Neonlight> Neonlights { get; set; }
     }
 }

@@ -17,7 +17,7 @@ namespace Infrastructure.Data
             // already exists, no action is taken (and no effort is made to ensure it
             // is compatible with the model for this context).
             context.Database.EnsureCreated();
-            /*
+            
             // Look for any TodoItems
             if (context.Neonlights.Any())
             {
@@ -25,7 +25,7 @@ namespace Infrastructure.Data
                 context.Database.ExecuteSqlCommand("DROP TABLE TodoItems");
                 context.Database.EnsureCreated();
             }
-
+            /*
             List<Neonlight> items = new List<Neonlight>
             {
                 new Neonlight { Battery=true, Name="Make homework"},
