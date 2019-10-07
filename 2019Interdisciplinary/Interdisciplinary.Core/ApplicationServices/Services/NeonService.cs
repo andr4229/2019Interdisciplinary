@@ -18,7 +18,19 @@ namespace Interdisciplinary.Core.ApplicationServices.Services
         }
         public void Create(Neonlight nl)
         {
-            _nlRepo.Create(nl);
+            try
+            {
+                if(nl.Color == null) throw new InvalidDataException("You need a color for the neonlight");
+                else if (nl.Description == null)
+                    throw new InvalidDataException("You need a description for the product");
+                else if (nl.Name == null) throw new InvalidDataException("You need a name for the product");
+                else if (nl.Shape == null) throw new InvalidDataException("You need a Shape for the Product");
+                _nlRepo.Create(nl);
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidDataException("You are missing some data");
+            }
         }
 
         public Neonlight ReadById(int id)
