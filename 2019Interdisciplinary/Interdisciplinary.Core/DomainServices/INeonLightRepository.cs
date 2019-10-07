@@ -8,7 +8,7 @@ namespace Interdisciplinary.Core.DomainServices
 {
     public interface INeonLightRepository
     {
-        void Create();
+        void Create(Neonlight nl);
         Neonlight ReadById(int id);
         IEnumerable<Neonlight> ReadAll();
         Neonlight Update(int id);

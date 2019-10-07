@@ -7,9 +7,9 @@ namespace Interdisciplinary.Core.ApplicationServices
 {
     public interface INeonService
     {
-        void Create();
+        void Create(Neonlight nl);
         Neonlight ReadById(int id);
-        IEnumerable<Neonlight> ReadAll();
+        List<Neonlight> ReadAll();
         Neonlight Update(int id);
         void Delete(int id);
     }
