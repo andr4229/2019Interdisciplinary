@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Interdisciplinary.Core.DomainServices;
 using Interdisciplinary.Core.Entity;
 
-namespace Interdisciplinary.Core.ApplicationServices.Services
+namespace Infrastructure.Data.Repositories
 {
-    public class NeonService: INeonService
-
+    public class NeonLightRepository: INeonLightRepository
     {
         public void Create()
         {

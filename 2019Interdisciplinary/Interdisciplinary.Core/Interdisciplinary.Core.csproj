@@ -4,4 +4,8 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Interdisciplinary.Core.Entity\Interdisciplinary.Core.Entity.csproj" />
+  </ItemGroup>
+
 </Project>
