@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace UI.RestAPI.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class NeonlightsController : Controller
     {
         /*private readonly INeonService _neonService;
@@ -22,6 +24,8 @@ namespace UI.RestAPI.Controllers
         public ActionResult<IEnumerable<Neonlight>> Get()
         {
             tempList.Add(new Neonlight{Name="name1"});
+            tempList.Add(new Neonlight { Name = "name2" });
+            tempList.Add(new Neonlight { Name = "name3" });
             return tempList;
         }
 

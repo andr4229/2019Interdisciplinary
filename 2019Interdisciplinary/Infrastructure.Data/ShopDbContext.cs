@@ -29,7 +29,5 @@ namespace Infrastructure.Data
         public DbSet<Neonlight> Neonlights;
         public DbSet<Order> Orders;
         public DbSet<OrderLine> OrderLines;
-
-
     }
 }
