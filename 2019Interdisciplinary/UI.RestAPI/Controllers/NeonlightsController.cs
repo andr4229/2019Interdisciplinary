@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Interdisciplinary.Core.Entity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace UI.RestAPI.Controllers
@@ -14,10 +15,14 @@ namespace UI.RestAPI.Controllers
             _neonService = neonService;
         }*/
         // GET api/neonlights
+
+        private List<Neonlight> tempList = new List<Neonlight>();
+        
         [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        public ActionResult<IEnumerable<Neonlight>> Get()
         {
-            return new string[] { "value1", "value2" };
+            tempList.Add(new Neonlight{Name="name1"});
+            return tempList;
         }
 
         // GET api/neonlights/5
