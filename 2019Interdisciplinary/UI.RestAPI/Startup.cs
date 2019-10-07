@@ -2,10 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Infrastructure.Data;
+using Infrastructure.Data.Repositories;
+using Interdisciplinary.Core.ApplicationServices;
+using Interdisciplinary.Core.ApplicationServices.Services;
+using Interdisciplinary.Core.DomainServices;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -26,6 +32,10 @@ namespace UI.RestAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<INeonLightRepository, NeonLightRepository>();
+            services.AddScoped<INeonService, NeonService>();
+
+            services.AddDbContext<ShopDbContext>(opt => opt.UseSqlite("Data Source=NeonlightShop.db"));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
