@@ -32,10 +32,18 @@ namespace UI.RestAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            if(Environment.IsDevelopment())
+            {
+                services.AddDbContext<ShopDbContext>(opt => opt.UseSqlite("Data Source=NeonlightShop.db"));
+            }
+            else
+            {
+                services.AddDbContext<ShopDbContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("defaultConnection")));
+            }
             services.AddScoped<INeonLightRepository, NeonLightRepository>();
             services.AddScoped<INeonService, NeonService>();
 
-            services.AddDbContext<ShopDbContext>(opt => opt.UseSqlite("Data Source=NeonlightShop.db"));
+            
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
@@ -48,7 +56,16 @@ namespace UI.RestAPI
             }
             else
             {
+                using (var scope = app.ApplicationServices.CreateScope())
+                {
+                    // Initialize the database
+                    var services = scope.ServiceProvider;
+                    var dbContext = services.GetService<ShopDbContext>();
+                    var dbInitializer = services.GetService<IDbInitializer>();
+                    dbInitializer.Initialize(dbContext);
+                }
                 app.UseHsts();
+                
             }
 
             app.UseHttpsRedirection();
