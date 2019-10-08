@@ -23,7 +23,16 @@ namespace UI.RestAPI.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<Neonlight>> Get()
         {
-            tempList.Add(new Neonlight{Name="name1"});
+            tempList.Add(new Neonlight{
+                Name ="name1",
+                Battery =true,
+                Color =Neonlight.Colour.Green,
+                Description ="it is a neonlight",
+                EnergyLabel ="A+",
+                Price =22,
+                Shape =Neonlight.Shapes.Banana,
+                Size =12,
+                WpH =44});
             tempList.Add(new Neonlight { Name = "name2" });
             tempList.Add(new Neonlight { Name = "name3" });
             return tempList;
