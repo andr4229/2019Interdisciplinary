@@ -26,8 +26,8 @@ namespace Infrastructure.Data
                 .HasForeignKey(ol => ol.NId);
         }
 
-        public DbSet<Neonlight> Neonlights;
-        public DbSet<Order> Orders;
-        public DbSet<OrderLine> OrderLines;
+        public DbSet<Neonlight> Neonlights { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderLine> OrderLines { get; set; }
     }
 }
