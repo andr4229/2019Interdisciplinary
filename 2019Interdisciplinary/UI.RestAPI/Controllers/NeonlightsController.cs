@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Interdisciplinary.Core.ApplicationServices;
+using Interdisciplinary.Core.ApplicationServices.Services;
 using Interdisciplinary.Core.Entity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,6 +13,10 @@ namespace UI.RestAPI.Controllers
     [ApiController]
     public class NeonlightsController : Controller
     {
+        public NeonlightsController(INeonService neonService)
+        {
+            _neonService = neonService;
+        }
         /*private readonly INeonService _neonService;
         public NeonlightsController(INeonService neonService)
         {
@@ -19,27 +25,27 @@ namespace UI.RestAPI.Controllers
         // GET api/neonlights
 
         private List<Neonlight> tempList = new List<Neonlight>();
-        
+        private readonly INeonService _neonService;
+
         [HttpGet]
         public ActionResult<IEnumerable<Neonlight>> Get()
         {
-            tempList.Add(new Neonlight{Name="name1"});
-            tempList.Add(new Neonlight { Name = "name2" });
-            tempList.Add(new Neonlight { Name = "name3" });
+            _neonService.ReadAll();
             return tempList;
         }
 
         // GET api/neonlights/5
         [HttpGet("{id}")]
-        public ActionResult<string> Get(int id)
+        public ActionResult<Neonlight> Get(int id)
         {
-            return "value";
+            return _neonService.ReadById(id);
         }
 
         // POST api/neonlights
         [HttpPost]
         public void Post([FromBody] string value)
         {
+
         }
 
         // PUT api/neonlights/5

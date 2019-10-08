@@ -15,19 +15,23 @@ namespace Infrastructure.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<Order>()
-                .HasMany(o => o.OrderLines)
-                .WithOne(ol => ol.Order)
-                .HasForeignKey(ol => ol.OId);
 
-            modelBuilder.Entity<Neonlight>()
-                .HasMany(nl => nl.Orders)
-                .WithOne(ol => ol.Products)
-                .HasForeignKey(ol => ol.NId);
+            modelBuilder.Entity<OrderLine>()
+                .HasKey(ol => new { ol.NeonlightId, ol.OrderId });
+
+            modelBuilder.Entity<OrderLine>()
+                .HasOne(ol => ol.Order)
+                .WithMany(o => o.OrderLines)
+                .HasForeignKey(ol => ol.OrderId);
+
+            modelBuilder.Entity<OrderLine>()
+                .HasOne(ol=>ol.Products)
+                .WithMany(p => p.Orders)
+                .HasForeignKey(ol => ol.NeonlightId);
         }
 
-        public DbSet<Neonlight> Neonlights;
-        public DbSet<Order> Orders;
-        public DbSet<OrderLine> OrderLines;
+        public DbSet<Neonlight> Neonlights { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderLine> OrderLines { get; set; }
     }
 }

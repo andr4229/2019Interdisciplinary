@@ -6,13 +6,13 @@ namespace Interdisciplinary.Core.Entity
 {
     public class OrderLine
     {
-        public int OId;
-        public Order Order;
+        public int OrderId { get; set; }
+        public Order Order { get; set; }
 
-        public int NId;
-        public Neonlight Products;
+        public int NeonlightId { get; set; }
+        public Neonlight Products { get; set; }
 
-        public int Amount;
+        public int Amount { get; set; }
         public double PriceWhenBought { get; set; }
     }
 }
