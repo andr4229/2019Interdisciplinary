@@ -31,7 +31,6 @@ namespace UI.RestAPI.Controllers
         [HttpGet]
         public ActionResult<FilteredList<Neonlight>> Get([FromQuery]Filter filter)
         {
-
             return _neonService.ReadAll(filter);
         }
 

@@ -25,8 +25,9 @@ namespace Infrastructure.Data.Repositories
 
         public Neonlight ReadById(int id)
         {
-            return _ctx.Neonlights.Include(nl=>nl.Orders)
-                .ThenInclude(ol=>ol.Order)
+            return _ctx.Neonlights
+                .Include(nl=>nl.Orders)
+                //.ThenInclude(ol=>ol.Order)
                 .FirstOrDefault(nl => nl.Id == id);
         }
 
@@ -37,7 +38,7 @@ namespace Infrastructure.Data.Repositories
             {
                 filteredList.List = _ctx.Neonlights
                     .Include(nl => nl.Orders)
-                    .ThenInclude(ol => ol.Order)
+                    //.ThenInclude(ol => ol.Order)
                     .Skip((filter.CurrentPage - 1) * filter.ItemsPrPage)
                     .Take(filter.ItemsPrPage);
                 filteredList.Count = _ctx.Neonlights.Count();
