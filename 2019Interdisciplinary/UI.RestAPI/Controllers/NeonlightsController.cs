@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Interdisciplinary.Core.ApplicationServices;
 using Interdisciplinary.Core.ApplicationServices.Services;
+using Interdisciplinary.Core.DomainServices.Filtering;
 using Interdisciplinary.Core.Entity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -28,10 +29,10 @@ namespace UI.RestAPI.Controllers
         private readonly INeonService _neonService;
 
         [HttpGet]
-        public ActionResult<IEnumerable<Neonlight>> Get()
+        public ActionResult<FilteredList<Neonlight>> Get(Filter filter)
         {
 
-            return _neonService.ReadAll();
+            return _neonService.ReadAll(filter);
         }
 
         // GET api/neonlights/5

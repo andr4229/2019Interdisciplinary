@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Interdisciplinary.Core.DomainServices;
+using Interdisciplinary.Core.DomainServices.Filtering;
 using Interdisciplinary.Core.Entity;
 using Microsoft.EntityFrameworkCore;
 using SQLitePCL;
@@ -34,13 +35,32 @@ namespace Infrastructure.Data.Repositories
             return order;
         }
 
-        public IEnumerable<Order> ReadAll()
+        public FilteredList<Order> ReadAll(Filter filter)
         {
-            return _ctx.Orders
-                .Include(o=>o.OrderLines)
-                .ThenInclude(ol=>ol.Products)
-                .Include(o=>o.Customer)
-                .ThenInclude(c=>c.Address);
+            var filteredList = new FilteredList<Order>();
+            if (filter != null && filter.ItemsPrPage > 0 && filter.CurrentPage > 0)
+            {
+                filteredList.List = _ctx.Orders
+                    .Include(o=>o.OrderLines)
+                    .ThenInclude(ol=>ol.Products)
+                    .Include(o=>o.Customer)
+                    .ThenInclude(c=>c.Address)
+                    .ThenInclude(ca=>ca.Address)
+                    .Skip((filter.CurrentPage - 1) * filter.ItemsPrPage)
+                    .Take(filter.ItemsPrPage);
+                filteredList.Count = _ctx.Customers.Count();
+                return filteredList;
+            }
+
+            //return the list, so it is not filtered, if all the items should be on the page
+            filteredList.List = _ctx.Orders
+                .Include(o => o.OrderLines)
+                .ThenInclude(ol => ol.Products)
+                .Include(o => o.Customer)
+                .ThenInclude(c => c.Address)
+                .ThenInclude(ca => ca.Address);
+            filteredList.Count = _ctx.Customers.Count();
+            return filteredList;
         }
 
         public Order Update(Order orderUpdate)

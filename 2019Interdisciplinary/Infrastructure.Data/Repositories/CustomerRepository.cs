@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Interdisciplinary.Core.DomainServices;
+using Interdisciplinary.Core.DomainServices.Filtering;
 using Interdisciplinary.Core.Entity;
 using Microsoft.EntityFrameworkCore;
 
@@ -31,14 +32,28 @@ namespace Infrastructure.Data.Repositories
                 .FirstOrDefault(c => c.Id == id);
         }
 
-        public List<Customer> ReadAll()
+        public FilteredList<Customer> ReadAll(Filter filter)
         {
-            return _ctx.Customers
+            var filteredList = new FilteredList<Customer>();
+            if (filter != null && filter.ItemsPrPage > 0 && filter.CurrentPage > 0)
+            {
+                filteredList.List = _ctx.Customers
+                    .Include(c => c.Address)
+                    .ThenInclude(ca => ca.Address)
+                    .Include(c => c.Orders)
+                    .Skip((filter.CurrentPage - 1) * filter.ItemsPrPage)
+                    .Take(filter.ItemsPrPage);
+                filteredList.Count = _ctx.Customers.Count();
+                return filteredList;
+            }
+
+            //return the list, so it is not filtered, if all the items should be on the page
+            filteredList.List = _ctx.Customers
                 .Include(c => c.Address)
-                .Include(c => c.Orders)
-                .ThenInclude(o => o.OrderLines)
-                .ThenInclude(ol => ol.Products)
-                .ToList();
+                .ThenInclude(ca => ca.Address)
+                .Include(c => c.Orders);
+            filteredList.Count = _ctx.Customers.Count();
+            return filteredList;
         }
 
         public Customer Update(Customer customerUpdate)

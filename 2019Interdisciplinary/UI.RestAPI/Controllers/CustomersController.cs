@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Interdisciplinary.Core.DomainServices;
+using Interdisciplinary.Core.DomainServices.Filtering;
 using Interdisciplinary.Core.Entity;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -19,11 +20,11 @@ namespace UI.RestAPI.Controllers
         {
             _custRepo = custRepo;
         }
-        // GET api/values
+        // GET api/values?CurrentPage=1&ItemsPrPage=2
         [HttpGet]
-        public ActionResult<IEnumerable<Customer>> Get()
+        public ActionResult<FilteredList<Customer>> Get(Filter filter)
         {
-            return _custRepo.ReadAll();
+            return _custRepo.ReadAll(filter);
         }
 
         // GET api/values/5

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Interdisciplinary.Core.ApplicationServices;
+using Interdisciplinary.Core.DomainServices.Filtering;
 using Interdisciplinary.Core.Entity;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -21,9 +22,9 @@ namespace UI.RestAPI.Controllers
         }
         // GET api/values
         [HttpGet]
-        public ActionResult<IEnumerable<Order>> Get()
+        public ActionResult<FilteredList<Order>> Get(Filter filter)
         {
-            return _orderService.ReadAll();
+            return _orderService.ReadAll(filter);
         }
 
         // GET api/values/5

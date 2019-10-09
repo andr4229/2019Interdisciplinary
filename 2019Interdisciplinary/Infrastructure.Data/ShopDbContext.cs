@@ -20,6 +20,19 @@ namespace Infrastructure.Data
                 .WithMany(c => c.Orders)
                 .OnDelete(DeleteBehavior.SetNull);
 
+            modelBuilder.Entity<CustomerAddress>()
+                .HasKey(ca => new {ca.AddressId, ca.CustomerId});
+
+            modelBuilder.Entity<CustomerAddress>()
+                .HasOne(ca => ca.Customer)
+                .WithMany(c => c.Address)
+                .HasForeignKey(ca => ca.CustomerId);
+
+            modelBuilder.Entity<CustomerAddress>()
+                .HasOne(ca => ca.Address)
+                .WithMany(a => a.Customer)
+                .HasForeignKey(ca => ca.AddressId);
+
             modelBuilder.Entity<OrderLine>()
                 .HasKey(ol => new { ol.NeonlightId, ol.OrderId });
 

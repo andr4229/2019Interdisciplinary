@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Text;
+using Interdisciplinary.Core.DomainServices.Filtering;
 using Interdisciplinary.Core.Entity;
 
 namespace Interdisciplinary.Core.ApplicationServices
@@ -10,7 +11,7 @@ namespace Interdisciplinary.Core.ApplicationServices
     {
         void Create(Order order);
         Order ReadById(int id);
-        List<Order> ReadAll();
+        FilteredList<Order> ReadAll(Filter filter);
         Order Update(Order orderUpdate);
         void Delete(int id);
     }

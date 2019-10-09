@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Interdisciplinary.Core.DomainServices.Filtering;
 using Interdisciplinary.Core.Entity;
 
 namespace Interdisciplinary.Core.ApplicationServices
@@ -9,7 +10,7 @@ namespace Interdisciplinary.Core.ApplicationServices
     {
         void Create(Customer customer);
         Customer ReadById(int id);
-        List<Customer> ReadAll();
+        FilteredList<Customer> ReadAll(Filter filter);
         Customer Update(Customer customer);
         void Delete(int id);
     }

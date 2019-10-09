@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using Interdisciplinary.Core.DomainServices;
+using Interdisciplinary.Core.DomainServices.Filtering;
 using Interdisciplinary.Core.Entity;
 
 namespace Interdisciplinary.Core.ApplicationServices.Services
@@ -39,11 +40,11 @@ namespace Interdisciplinary.Core.ApplicationServices.Services
             }
         }
 
-        public List<Customer> ReadAll()
+        public FilteredList<Customer> ReadAll(Filter filter)
         {
             try
             {
-                return _custRepo.ReadAll();
+                return _custRepo.ReadAll(filter);
             }
             catch (Exception ex)
             {

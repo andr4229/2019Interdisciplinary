@@ -13,6 +13,7 @@ namespace Interdisciplinary.Core.Entity
         //etc. (streetNumber)1.th
         public int ZipCode { get; set; }
         public string City { get; set; }
+        public List<CustomerAddress> Customer { get; set; }
 
     }
 }

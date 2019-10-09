@@ -6,6 +6,7 @@ using Interdisciplinary.Core.Entity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System.Linq;
+using Interdisciplinary.Core.DomainServices.Filtering;
 
 namespace Infrastructure.Data.Repositories
 {
@@ -29,10 +30,26 @@ namespace Infrastructure.Data.Repositories
                 .FirstOrDefault(nl => nl.Id == id);
         }
 
-        public IEnumerable<Neonlight> ReadAll()
+        public FilteredList<Neonlight> ReadAll(Filter filter)
         {
-            return _ctx.Neonlights.Include(nl=>nl.Orders)
-                .ThenInclude(ol=>ol.Order);
+            var filteredList = new FilteredList<Neonlight>();
+            if (filter != null && filter.ItemsPrPage > 0 && filter.CurrentPage > 0)
+            {
+                filteredList.List = _ctx.Neonlights
+                    .Include(nl => nl.Orders)
+                    .ThenInclude(ol => ol.Order)
+                    .Skip((filter.CurrentPage - 1) * filter.ItemsPrPage)
+                    .Take(filter.ItemsPrPage);
+                filteredList.Count = _ctx.Neonlights.Count();
+                return filteredList;
+            }
+
+            //return the list, so it is not filtered, if all the items should be on the page
+            filteredList.List = _ctx.Neonlights
+                .Include(nl => nl.Orders)
+                .ThenInclude(ol => ol.Products);
+            filteredList.Count = _ctx.Neonlights.Count();
+            return filteredList;
         }
 
         public Neonlight Update(Neonlight updatedNl)

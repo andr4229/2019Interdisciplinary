@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using Interdisciplinary.Core.DomainServices;
+using Interdisciplinary.Core.DomainServices.Filtering;
 using Interdisciplinary.Core.Entity;
 
 namespace Interdisciplinary.Core.ApplicationServices.Services
@@ -40,11 +41,11 @@ namespace Interdisciplinary.Core.ApplicationServices.Services
             }
         }
 
-        public List<Order> ReadAll()
+        public FilteredList<Order> ReadAll(Filter filter)
         {
             try
             {
-                return _orderRepo.ReadAll().ToList();
+                return _orderRepo.ReadAll(filter);
             }
             catch (Exception ex)
             {

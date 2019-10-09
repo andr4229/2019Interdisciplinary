@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Interdisciplinary.Core.DomainServices.Filtering;
 using Interdisciplinary.Core.Entity;
 
 namespace Interdisciplinary.Core.ApplicationServices
@@ -9,7 +10,7 @@ namespace Interdisciplinary.Core.ApplicationServices
     {
         void Create(Neonlight nl);
         Neonlight ReadById(int id);
-        List<Neonlight> ReadAll();
+        FilteredList<Neonlight> ReadAll(Filter filter);
         Neonlight Update(Neonlight nlToUpdate);
         void Delete(int id);
     }

@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using Interdisciplinary.Core.DomainServices;
+using Interdisciplinary.Core.DomainServices.Filtering;
 using Interdisciplinary.Core.Entity;
 
 namespace Interdisciplinary.Core.ApplicationServices.Services
@@ -46,11 +47,11 @@ namespace Interdisciplinary.Core.ApplicationServices.Services
 
         }
 
-        public List<Neonlight> ReadAll()
+        public FilteredList<Neonlight> ReadAll(Filter filter)
         {
             try
             {
-                return _nlRepo.ReadAll().ToList();
+                return _nlRepo.ReadAll(filter);
             }
             catch (Exception ex)
             {
