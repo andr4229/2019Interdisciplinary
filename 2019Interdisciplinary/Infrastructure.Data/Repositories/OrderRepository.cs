@@ -60,6 +60,7 @@ namespace Infrastructure.Data.Repositories
         public void Delete(int id)
         {
             _ctx.RemoveRange(ReadById(id));
+            _ctx.SaveChanges();
         }
     }
 }

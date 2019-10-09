@@ -30,20 +30,8 @@ namespace UI.RestAPI.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<Neonlight>> Get()
         {
-            
-            tempList.Add(new Neonlight{
-                Name ="name1",
-                Battery =true,
-                Color =Neonlight.Colour.Green,
-                Description ="it is a neonlight",
-                EnergyLabel ="A+",
-                Price =22,
-                Shape =Neonlight.Shapes.Banana,
-                Size =12,
-                WpH =44});
-            tempList.Add(new Neonlight { Name = "name2" });
-            tempList.Add(new Neonlight { Name = "name3" });
-            return tempList;
+
+            return _neonService.ReadAll();
         }
 
         // GET api/neonlights/5
@@ -55,15 +43,23 @@ namespace UI.RestAPI.Controllers
 
         // POST api/neonlights
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void Post([FromBody] Neonlight neonlight)
         {
-
+            _neonService.Create(neonlight);
         }
 
         // PUT api/neonlights/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public ActionResult<Neonlight> Put(int id, [FromBody] Neonlight neonlight)
         {
+            if (id < 1 || id != neonlight.Id)
+            {
+                return BadRequest("The parameter id and id in the order is not the same");
+            }
+            else
+            {
+                return Ok(_neonService.Update(neonlight));
+            }
         }
 
         // DELETE api/neonlights/5

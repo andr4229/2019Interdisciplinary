@@ -23,7 +23,7 @@ namespace Infrastructure.Data
             if (context.Neonlights.Any())
             {
                 // Delete and re-create the database, if it was already been created.
-                context.Database.ExecuteSqlCommand("DROP TABLE TodoItems");
+                //context.Database.ExecuteSqlCommand("DROP TABLE TodoItems");
 
                 context.Database.EnsureCreated();
             }

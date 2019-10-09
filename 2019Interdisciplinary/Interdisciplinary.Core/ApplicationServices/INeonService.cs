@@ -10,7 +10,7 @@ namespace Interdisciplinary.Core.ApplicationServices
         void Create(Neonlight nl);
         Neonlight ReadById(int id);
         List<Neonlight> ReadAll();
-        Neonlight Update(int id, Neonlight nlToUpdate);
+        Neonlight Update(Neonlight nlToUpdate);
         void Delete(int id);
     }
 }

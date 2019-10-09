@@ -11,7 +11,7 @@ namespace Interdisciplinary.Core.DomainServices
         void Create(Neonlight nl);
         Neonlight ReadById(int id);
         IEnumerable<Neonlight> ReadAll();
-        Neonlight Update(int id,Neonlight updatedNl);
+        Neonlight Update(Neonlight updatedNl);
         void Delete(int id);
     }
 }

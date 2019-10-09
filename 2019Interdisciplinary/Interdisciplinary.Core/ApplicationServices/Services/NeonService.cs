@@ -20,11 +20,11 @@ namespace Interdisciplinary.Core.ApplicationServices.Services
         {
             try
             {
-                if(nl.Color == null) throw new InvalidDataException("You need a color for the neonlight");
-                else if (nl.Description == null)
-                    throw new InvalidDataException("You need a description for the product");
-                else if (nl.Name == null) throw new InvalidDataException("You need a name for the product");
-                else if (nl.Shape == null) throw new InvalidDataException("You need a Shape for the Product");
+                //if(nl.Color == null) throw new InvalidDataException("You need a color for the neonlight");
+                //else if (nl.Description == null)
+                //    throw new InvalidDataException("You need a description for the product");
+                //else if (nl.Name == null) throw new InvalidDataException("You need a name for the product");
+                //else if (nl.Shape == null) throw new InvalidDataException("You need a Shape for the Product");
                 _nlRepo.Create(nl);
             }
             catch (Exception ex)
@@ -58,11 +58,11 @@ namespace Interdisciplinary.Core.ApplicationServices.Services
             }
         }
 
-        public Neonlight Update(int id, Neonlight nlToUpdate)
+        public Neonlight Update(Neonlight nlToUpdate)
         {
             try
             {
-                return _nlRepo.Update(id, nlToUpdate);
+                return _nlRepo.Update(nlToUpdate);
             }
             catch (Exception ex)
             {

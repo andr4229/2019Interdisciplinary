@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
@@ -45,6 +46,9 @@ namespace UI.RestAPI
 
             services.AddScoped<INeonLightRepository, NeonLightRepository>();
             services.AddScoped<INeonService, NeonService>();
+
+            services.AddScoped<IOrderRepository, OrderRepository>();
+            services.AddScoped<IOrderService, OrderService>();
             services.AddTransient<IDbInitializer, DbInitializer>();
 
 
