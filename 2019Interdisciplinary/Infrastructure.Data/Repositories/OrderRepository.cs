@@ -25,12 +25,18 @@ namespace Infrastructure.Data.Repositories
 
         public Order ReadById(int id)
         {
-            return _ctx.Orders.FirstOrDefault(o => o.Id == id);
+            var order = _ctx.Orders
+                .Include(o=>o.OrderLines)
+                .ThenInclude(ol=>ol.Products)
+                .FirstOrDefault(o => o.Id == id);
+            return order;
         }
 
         public IEnumerable<Order> ReadAll()
         {
-            return _ctx.Orders;
+            return _ctx.Orders
+                .Include(o=>o.OrderLines)
+                .ThenInclude(ol=>ol.Products);
         }
 
         public Order Update(Order orderUpdate)
@@ -39,7 +45,7 @@ namespace Infrastructure.Data.Repositories
 
             _ctx.Attach(orderUpdate).State = EntityState.Modified;
             //now i remove all orderlines with that orderid
-            _ctx.OrderLines.RemoveRange(_ctx.OrderLines.Where(ol => ol.OId == orderUpdate.Id));
+            _ctx.OrderLines.RemoveRange(_ctx.OrderLines.Where(ol => ol.OrderId == orderUpdate.Id));
 
             foreach (var orderLine in newOrderLines)
             {
