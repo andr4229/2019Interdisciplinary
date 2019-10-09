@@ -51,5 +51,6 @@ namespace Infrastructure.Data
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderLine> OrderLines { get; set; }
         public DbSet<Customer> Customers { get; set; }
+        public DbSet<Address> Address { get; set; }
     }
 }

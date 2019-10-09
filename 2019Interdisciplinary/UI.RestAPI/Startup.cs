@@ -49,6 +49,9 @@ namespace UI.RestAPI
 
             services.AddScoped<IOrderRepository, OrderRepository>();
             services.AddScoped<IOrderService, OrderService>();
+
+            services.AddScoped<ICustomerRepository, CustomerRepository>();
+            services.AddScoped<ICustomerService, CustomerService>();
             services.AddTransient<IDbInitializer, DbInitializer>();
 
 
@@ -69,6 +72,13 @@ namespace UI.RestAPI
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                using (var scope = app.ApplicationServices.CreateScope())
+                {
+                    var ctx = scope.ServiceProvider.GetService<ShopDbContext>();
+                    ctx.Database.EnsureDeleted();
+                    IDbInitializer dbInitializer = new DbInitializer();
+                    dbInitializer.Initialize(ctx);
+                }
             }
             else
             {

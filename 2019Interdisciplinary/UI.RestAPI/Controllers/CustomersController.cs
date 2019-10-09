@@ -12,7 +12,7 @@ namespace UI.RestAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CustomersController : ControllerBase
+    public class CustomersController : Controller
     {
         private ICustomerRepository _custRepo;
 

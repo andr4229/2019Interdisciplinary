@@ -25,7 +25,6 @@ namespace UI.RestAPI.Controllers
         }*/
         // GET api/neonlights
 
-        private List<Neonlight> tempList = new List<Neonlight>();
         private readonly INeonService _neonService;
 
         [HttpGet]
