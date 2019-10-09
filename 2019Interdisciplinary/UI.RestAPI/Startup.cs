@@ -60,7 +60,7 @@ namespace UI.RestAPI
                 var services = scope.ServiceProvider;
                 var dbContext = services.GetService<ShopDbContext>();
                 var dbInitializer = services.GetService<IDbInitializer>();
-                dbInitializer.Initialize(dbContext);
+                //dbInitializer.Initialize(dbContext);
             }
             if (env.IsDevelopment())
             {
