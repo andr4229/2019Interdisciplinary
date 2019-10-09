@@ -26,8 +26,10 @@ namespace Infrastructure.Data.Repositories
         public Order ReadById(int id)
         {
             var order = _ctx.Orders
-                .Include(o=>o.OrderLines)
-                .ThenInclude(ol=>ol.Products)
+                .Include(o => o.OrderLines)
+                .ThenInclude(ol => ol.Products)
+                .Include(o => o.Customer)
+                .ThenInclude(c=>c.Address)
                 .FirstOrDefault(o => o.Id == id);
             return order;
         }
@@ -36,7 +38,9 @@ namespace Infrastructure.Data.Repositories
         {
             return _ctx.Orders
                 .Include(o=>o.OrderLines)
-                .ThenInclude(ol=>ol.Products);
+                .ThenInclude(ol=>ol.Products)
+                .Include(o=>o.Customer)
+                .ThenInclude(c=>c.Address);
         }
 
         public Order Update(Order orderUpdate)
@@ -51,8 +55,7 @@ namespace Infrastructure.Data.Repositories
             {
                 _ctx.Entry(orderLine).State = EntityState.Added;
             }
-            //Uncomment this when there are customers
-            //_ctx.Entry(orderUpdate).Reference(o => o.Customer).IsModified = true;
+            _ctx.Entry(orderUpdate).Reference(o => o.Customer).IsModified = true;
             _ctx.SaveChanges();
             return orderUpdate;
         }

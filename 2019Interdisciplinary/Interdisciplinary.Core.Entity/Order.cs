@@ -10,5 +10,6 @@ namespace Interdisciplinary.Core.Entity
         public DateTime OrderDate { get; set; }
         public DateTime DeliveryDate { get; set; }
         public List<OrderLine> OrderLines { get; set; }
+        public Customer Customer { get; set; }
     }
 }

@@ -15,6 +15,10 @@ namespace Infrastructure.Data
         {
             base.OnModelCreating(modelBuilder);
 
+            modelBuilder.Entity<Order>()
+                .HasOne(o => o.Customer)
+                .WithMany(c => c.Orders)
+                .OnDelete(DeleteBehavior.SetNull);
 
             modelBuilder.Entity<OrderLine>()
                 .HasKey(ol => new { ol.NeonlightId, ol.OrderId });
@@ -33,5 +37,6 @@ namespace Infrastructure.Data
         public DbSet<Neonlight> Neonlights { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderLine> OrderLines { get; set; }
+        public DbSet<Customer> Customers { get; set; }
     }
 }
