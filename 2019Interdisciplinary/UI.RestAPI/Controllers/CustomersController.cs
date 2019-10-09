@@ -22,7 +22,7 @@ namespace UI.RestAPI.Controllers
         }
         // GET api/values?CurrentPage=1&ItemsPrPage=2
         [HttpGet]
-        public ActionResult<FilteredList<Customer>> Get(Filter filter)
+        public ActionResult<FilteredList<Customer>> Get([FromQuery]Filter filter)
         {
             return _custRepo.ReadAll(filter);
         }

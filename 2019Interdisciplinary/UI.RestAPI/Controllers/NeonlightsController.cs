@@ -29,7 +29,7 @@ namespace UI.RestAPI.Controllers
         private readonly INeonService _neonService;
 
         [HttpGet]
-        public ActionResult<FilteredList<Neonlight>> Get(Filter filter)
+        public ActionResult<FilteredList<Neonlight>> Get([FromQuery]Filter filter)
         {
 
             return _neonService.ReadAll(filter);
@@ -67,7 +67,7 @@ namespace UI.RestAPI.Controllers
         [HttpDelete("{id}")]
         public ActionResult<Neonlight> Delete(int id)
         {
-            if (id < 1 || id > _neonService.ReadAll().Count)
+            if (id < 1)
             {
                 return BadRequest("The parameter id and id in the order is not the same");
             }

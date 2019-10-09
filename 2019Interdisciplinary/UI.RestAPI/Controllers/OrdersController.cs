@@ -22,7 +22,7 @@ namespace UI.RestAPI.Controllers
         }
         // GET api/values
         [HttpGet]
-        public ActionResult<FilteredList<Order>> Get(Filter filter)
+        public ActionResult<FilteredList<Order>> Get([FromQuery]Filter filter)
         {
             return _orderService.ReadAll(filter);
         }

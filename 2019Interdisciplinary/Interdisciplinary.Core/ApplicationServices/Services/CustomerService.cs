@@ -68,7 +68,7 @@ namespace Interdisciplinary.Core.ApplicationServices.Services
         {
             try
             {
-                return _custRepo.Delete();
+                _custRepo.Delete(id);
             }
             catch (Exception ex)
             {
