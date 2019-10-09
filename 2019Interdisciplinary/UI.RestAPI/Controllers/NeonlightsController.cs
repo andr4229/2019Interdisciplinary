@@ -64,8 +64,17 @@ namespace UI.RestAPI.Controllers
 
         // DELETE api/neonlights/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public ActionResult<Neonlight> Delete(int id)
         {
+            if (id < 1 || id > _neonService.ReadAll().Count)
+            {
+                return BadRequest("The parameter id and id in the order is not the same");
+            }
+            else
+            {
+                _neonService.Delete(id);
+                return Ok("Deleted");
+            }
         }
     }
 }
