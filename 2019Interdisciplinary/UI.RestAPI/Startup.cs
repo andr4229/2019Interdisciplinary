@@ -52,9 +52,6 @@ namespace UI.RestAPI
 
             services.AddScoped<ICustomerRepository, CustomerRepository>();
             services.AddScoped<ICustomerService, CustomerService>();
-
-            services.AddScoped<IUserRepository, UserRepository>();
-            services.AddScoped<IUserService, UserService>();
             services.AddTransient<IDbInitializer, DbInitializer>();
 
 
@@ -85,7 +82,12 @@ namespace UI.RestAPI
             }
             else
             {
-                app.UseHsts();
+                using (var scope = app.ApplicationServices.CreateScope())
+                {
+                    var ctx = scope.ServiceProvider.GetService<ShopDbContext>();
+                    ctx.Database.EnsureCreated();
+                }
+                    app.UseHsts();
             }
 
             app.UseHttpsRedirection();

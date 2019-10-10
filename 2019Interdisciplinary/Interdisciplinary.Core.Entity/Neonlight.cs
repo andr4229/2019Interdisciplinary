@@ -18,7 +18,7 @@ namespace Interdisciplinary.Core.Entity
         public string EnergyLabel { get; set; }
         public bool Battery { get; set; }
         public List<OrderLine> Orders { get; set; }
-        
+        public string ImageURL { get; set; }
 
         public enum Colour
         {
