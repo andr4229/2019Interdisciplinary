@@ -14,5 +14,6 @@ namespace Interdisciplinary.Core.Entity
         public string Email { get; set; }
         public List<CustomerAddress> Address { get; set; }
         public List<Order> Orders { get; set; }
+        public List<Role> User { get; set; }
     }
 }

@@ -52,6 +52,9 @@ namespace UI.RestAPI
 
             services.AddScoped<ICustomerRepository, CustomerRepository>();
             services.AddScoped<ICustomerService, CustomerService>();
+
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IUserService, UserService>();
             services.AddTransient<IDbInitializer, DbInitializer>();
 
 

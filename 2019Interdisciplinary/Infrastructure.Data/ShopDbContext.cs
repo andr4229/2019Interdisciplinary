@@ -45,6 +45,19 @@ namespace Infrastructure.Data
                 .HasOne(ol=>ol.Products)
                 .WithMany(p => p.Orders)
                 .HasForeignKey(ol => ol.NeonlightId);
+
+            modelBuilder.Entity<Role>()
+                .HasKey(r => new {r.CustomerId, r.UserId});
+
+            modelBuilder.Entity<Role>()
+                .HasOne(r => r.User)
+                .WithMany(u => u.Customer)
+                .HasForeignKey(r =>r.UserId);
+
+            modelBuilder.Entity<Role>()
+                .HasOne(r => r.Customer)
+                .WithMany(c => c.User)
+                .HasForeignKey(r => r.CustomerId);
         }
 
         public DbSet<Neonlight> Neonlights { get; set; }
@@ -52,5 +65,6 @@ namespace Infrastructure.Data
         public DbSet<OrderLine> OrderLines { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Address> Address { get; set; }
+        public DbSet<User> Users { get; set; }
     }
 }
